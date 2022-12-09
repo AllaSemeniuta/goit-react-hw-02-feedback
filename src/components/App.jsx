@@ -1,5 +1,10 @@
+import React, { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 
-export const App = () => {
-  <></>;
-};
+export class App extends Component() {
+  render() {
+    <>
+      <GlobalStyle />
+    </>;
+  }
+}
