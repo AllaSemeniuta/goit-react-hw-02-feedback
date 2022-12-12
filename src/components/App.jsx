@@ -13,11 +13,9 @@ export class App extends Component {
     bad: 0,
   };
 
-  addFeedback = e => {
-    const options = e.target.textContent;
-
+  addFeedback = selectOption => {
     this.setState(prevState => ({
-      [options]: prevState[options] + 1,
+      [selectOption]: prevState[selectOption] + 1,
     }));
   };
 
@@ -39,23 +37,25 @@ export class App extends Component {
       <>
         <Box py="15px" px="30px">
           <GlobalStyle />
-          <Section title="Please leave feedback" />
-          <FeedbackOptions
-            options={feedbackCategories}
-            onLeaveFeedback={this.addFeedback}
-          />
-          <Section title="Statistics" />
-          {this.countTotalFeedback() >= 1 ? (
-            <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
-              total={this.countTotalFeedback}
-              positivePercentage={this.countPositiveFeedbackPercentage}
+          <Section title="Please leave feedback">
+            <FeedbackOptions
+              options={feedbackCategories}
+              onLeaveFeedback={this.addFeedback}
             />
-          ) : (
-            <Notificstion message="There is no feedback" />
-          )}
+          </Section>
+          <Section title="Statistics">
+            {this.countTotalFeedback() >= 1 ? (
+              <Statistics
+                good={this.state.good}
+                neutral={this.state.neutral}
+                bad={this.state.bad}
+                total={this.countTotalFeedback}
+                positivePercentage={this.countPositiveFeedbackPercentage}
+              />
+            ) : (
+              <Notificstion message="There is no feedback" />
+            )}
+          </Section>
         </Box>
       </>
     );
